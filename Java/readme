@@ -1,0 +1,6 @@
+juan Garcia
+202073539-5
+se asume que los metodos getter y setter no nececitan comentarios, tambien se asume que todos los datos ingresados estaran buenos
+se compila con:
+make legendOfMorio
+make test1
