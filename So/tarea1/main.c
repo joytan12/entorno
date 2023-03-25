@@ -55,7 +55,7 @@ void moverArchivo(int jugadores, char* rutaInicial, char* rutaIncompleta){
   }
 
   //ibrir directorio
-  char filenema1[256], filenema2[256];
+  char filenema1[256], filenema2[256]; //filenema1 tiene la ruta en donde se encuentra el archivo
   DIR* directorio;
   char* extencion = ".txt";
   struct dirent* archivo;
@@ -69,31 +69,30 @@ void moverArchivo(int jugadores, char* rutaInicial, char* rutaIncompleta){
     printf("No se puede abrir el directorio.\n");
     return 1;
   }
-
+ 
   while ((archivo = readdir(directorio)) != NULL) {
     if (strstr(archivo->d_name, extencion) != NULL){
       FILE* juego;
       char linea[50];
-      int jugarores;
+      int jugadores;
       sprintf(filenema1, "%s%s", rutaArchivos, archivo->d_name);
       juego = fopen(filenema1, "r");
       int cont = 0;
       while (fgets(linea, sizeof(linea), juego)){
         sprintf(filenema2, "%s%s", rutaRelativa, linea);
         if (cont == 0 && opcion == 1){
-          jugarores = atoi(linea);
+          jugadores = atoi(linea);
         } else if (cont == 1 && opcion == 2){
-          jugarores = atoi(linea);
+          jugadores = atoi(linea);
         } else if(cont == 2){
-          //se tiene que revisar las direcciones para los archivos
+          sprintf(filenema2, "%s%s", rutaRelativa, linea);
           if (access(filenema2, F_OK) != -1){
-            //moverArchivo(jugarores, filenema1, filenema2);
             CrearSecciones(filenema2);
           } else {
             mkdir(filenema2, 0700);
             CrearSecciones(filenema2);
           }
-          moverArchivo(jugadores, filenema2, filenema1)
+          moverArchivo(jugadores, filenema1, filenema2);
         }
         cont++;
       }
@@ -106,7 +105,6 @@ void moverArchivo(int jugadores, char* rutaInicial, char* rutaIncompleta){
 }
 
 int main () {
-  //CrearSecciones();
   CraerGenoro();
   printf("Hola mundo\n");
   return 0;
