@@ -5,49 +5,46 @@
 #include <unistd.h>
 
 // CraerSecciones void => void
-// crea las 3 secciones para casa genero que se va agregando 
-void CrearSecciones(char rutaIncompleta) {
-  struct dirent* archivo;
-  DIR* directorio = opendir(rutaInicial);
-  int cont = 0;
+// crea las 3 secciones para casa genero que se va agregando segun la ruta del archivo que se pase
+void CrearSecciones(char* rutaCompleta) {
   char rutaFinal[256];
-  char *carpeta1 = "menos_a_4000", *carpeta2 = "entre_4000_y_8000", *carpeta3 = "Mayor_a_8000";
+  char *carpeta1 = "/menos_a_4000", *carpeta2 = "/entre_4000_y_8000", *carpeta3 = "/Mayor_a_8000";
 
-  while ((archivo = readdir(directorio)) != NULL){
-    sprintf(rutaFinal, "%s%s", rutaIncompleta, );
-    if (cont == 0){
-      mkdir(rutaFinal, 0700);
-    } else if (cont == 1){      
-      mkdir(rutaFinal, 0700);
-    } else if (cont == 2) {
-      rename(rutaInicial, rutaFinal);
-    }
-    cont++;
-  }
+  sprintf(rutaFinal, "%s%s", rutaCompleta, carpeta1);
+  mkdir(rutaFinal, 0700);
+  sprintf(rutaFinal, "%s%s", rutaCompleta, carpeta2);
+  mkdir(rutaFinal, 0700);
+  sprintf(rutaFinal, "%s%s", rutaCompleta, carpeta3);
+  mkdir(rutaFinal, 0700);
 } 
 
-//esta funcione se de
-void moverArchivo(int jugadores, char rutaInicial, char rutaIncompleta){
-  DIR* directorio = opendir(rutaInicial);
+//esta funcione se dedica a llevar el archivo del juego de una rutaInicial a una rutaFinal,
+//mediante la conparacion de sus jugadores, se construye la rutaFinal
+void moverArchivo(int jugadores, char* rutaInicial, char* rutaIncompleta){
+  DIR* directorio = opendir(rutaIncompleta);
   struct dirent* archivo;
   int cont = 0;
   char rutaFinal[256];
+
   while ((archivo = readdir(directorio)) != NULL) {
     sprintf(rutaFinal, "%s%s", rutaIncompleta, archivo);
-    if (jugarores < 4000 && cont == 0){
+    printf("%s\n", rutaFinal);
+    if (jugadores < 4000 && cont == 4){
       rename(rutaInicial, rutaFinal);
-    } else if (4000 <= jugadores && jugarores <= 8000 && cont == 1) {
+      return;
+    } else if (4000 <= jugadores && jugadores <= 8000 && cont == 4) {
       rename(rutaInicial, rutaFinal);
-    } else if (cont == 2) {
+      return;
+    } else if (cont == 4) {
       rename(rutaInicial, rutaFinal);
     }
     cont++;
   }
-  closedir(directorio)
+  closedir(directorio);
 }
 
  int CraerGenoro() {  
-  //aqui se alige como se quiere ordenar las cossa
+  //aqui se alige como se quiere ordenar las cossa  
   int opcion;
   printf("ordenas por\n(1) jugarores actuales\n(2) pico de jugadores\n");
   scanf("%d", &opcion);
@@ -69,13 +66,12 @@ void moverArchivo(int jugadores, char rutaInicial, char rutaIncompleta){
 
   // Verificar que se abrio correctamente
   if (directorio == NULL) {
-  printf("No se puede abrir el directorio.\n");
+    printf("No se puede abrir el directorio.\n");
     return 1;
   }
 
   while ((archivo = readdir(directorio)) != NULL) {
     if (strstr(archivo->d_name, extencion) != NULL){
-      printf("entro a ver archivos de juegos\n");
       FILE* juego;
       char linea[50];
       int jugarores;
@@ -83,19 +79,21 @@ void moverArchivo(int jugadores, char rutaInicial, char rutaIncompleta){
       juego = fopen(filenema1, "r");
       int cont = 0;
       while (fgets(linea, sizeof(linea), juego)){
-        sprintf(filenema2, "%s%s", rutaRelativa, archivo->d_name);
+        sprintf(filenema2, "%s%s", rutaRelativa, linea);
         if (cont == 0 && opcion == 1){
           jugarores = atoi(linea);
         } else if (cont == 1 && opcion == 2){
           jugarores = atoi(linea);
-        } else if(cont == 3){
+        } else if(cont == 2){
           //se tiene que revisar las direcciones para los archivos
           if (access(filenema2, F_OK) != -1){
-            moverArchivo(jugarores, filenema1, filenema2);
+            //moverArchivo(jugarores, filenema1, filenema2);
+            CrearSecciones(filenema2);
           } else {
             mkdir(filenema2, 0700);
-            rename(filenema1, filenema2);
+            CrearSecciones(filenema2);
           }
+          moverArchivo(jugadores, filenema2, filenema1)
         }
         cont++;
       }
@@ -109,7 +107,6 @@ void moverArchivo(int jugadores, char rutaInicial, char rutaIncompleta){
 
 int main () {
   //CrearSecciones();
-  printf("entro al programa\n");
   CraerGenoro();
   printf("Hola mundo\n");
   return 0;
