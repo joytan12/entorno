@@ -92,7 +92,7 @@ void moverArchivo(int jugadores, char* rutaInicial, char* rutaIncompleta){
             mkdir(filenema2, 0700);
             CrearSecciones(filenema2);
           }
-          moverArchivo(jugadores, filenema1, filenema2);
+          // moverArchivo(jugadores, filenema1, filenema2);
         }
         cont++;
       }
