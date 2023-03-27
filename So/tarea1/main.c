@@ -29,11 +29,14 @@ void moverArchivo(int jugadores, char* rutaInicial, char* rutaIncompleta){
   while ((archivo = readdir(directorio)) != NULL) {
     sprintf(rutaFinal, "%s%s", rutaIncompleta, archivo);
     printf("%s\n", rutaFinal);
+    printf("%s\n", rutaInicial);
     if (jugadores < 4000 && cont == 4){
       rename(rutaInicial, rutaFinal);
+      closedir(directorio);
       return;
     } else if (4000 <= jugadores && jugadores <= 8000 && cont == 4) {
       rename(rutaInicial, rutaFinal);
+      closedir(directorio);
       return;
     } else if (cont == 4) {
       rename(rutaInicial, rutaFinal);
@@ -59,7 +62,7 @@ void moverArchivo(int jugadores, char* rutaInicial, char* rutaIncompleta){
   DIR* directorio;
   char* extencion = ".txt";
   struct dirent* archivo;
-  char rutaRelativa[100] = "../tarea1/CWD/", rutaArchivos[100] = "../tarea1/Archivos_Prueba/";
+  char rutaRelativa[256] = "../tarea1/CWD/", rutaArchivos[256] = "../tarea1/Archivos_Prueba/";
 
   //abrir el directorio
   directorio = opendir("../tarea1/Archivos_Prueba/");
@@ -73,7 +76,7 @@ void moverArchivo(int jugadores, char* rutaInicial, char* rutaIncompleta){
   while ((archivo = readdir(directorio)) != NULL) {
     if (strstr(archivo->d_name, extencion) != NULL){
       FILE* juego;
-      char linea[50];
+      char linea[256];
       int jugadores;
       sprintf(filenema1, "%s%s", rutaArchivos, archivo->d_name);
       juego = fopen(filenema1, "r");
@@ -85,14 +88,13 @@ void moverArchivo(int jugadores, char* rutaInicial, char* rutaIncompleta){
         } else if (cont == 1 && opcion == 2){
           jugadores = atoi(linea);
         } else if(cont == 2){
-          sprintf(filenema2, "%s%s", rutaRelativa, linea);
-          if (access(filenema2, F_OK) != -1){
-            CrearSecciones(filenema2);
-          } else {
+          printf("%s\n", linea);
+          snprintf(filenema2, sizeof(filenema2), "%s%s", rutaRelativa, strtok(linea, "\r\n"));
+          if (access(filenema2, F_OK) == -1){
             mkdir(filenema2, 0700);
-            CrearSecciones(filenema2);
+            CrearSecciones(filenema2);  
           }
-          // moverArchivo(jugadores, filenema1, filenema2);
+          moverArchivo(jugadores, filenema1, filenema2);
         }
         cont++;
       }
