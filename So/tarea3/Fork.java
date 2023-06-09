@@ -20,7 +20,6 @@ public class Fork {
                 for (int i = 1; i <= 4; i++) {
                     ProcessBuilder processBuilder = new ProcessBuilder("java", "-cp", "ruta_de_clases", "Proceso", Integer.toString(i));
                     Process proceso = processBuilder.start();
-                    System.out.println(proceso);
                     if (proceso.isAlive()){
                         hijo(i, dim);
                     }
@@ -28,10 +27,11 @@ public class Fork {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } 
-        // else {
+        } else {
             // aqui va el codigo de busqueda ayuda
-        // }
+            // System.out.println("x:" + dim.getX() + " " + dim.getLimX() + " y:" + dim.getY() + " " + dim.getLimY());
+            busqueda(dim);
+        }
     }
 
     public void hijo(int valor, Resultado aux){
@@ -59,6 +59,18 @@ public class Fork {
         }
         if (valor == 4 || valor == 3){
             dim.setY(dim.getY() + aux2);
+        }
+    }
+
+    public void busqueda(Resultado dim){
+        // aqui va el algoritmo de busqueda en la matriz
+        for (int i = dim.getX(); i < dim.getLimX(); i++){
+            for (int j = dim.getY(); j < dim.getLimY() ; j++){
+                if (reader.getMatriz()[i][j] == 1){
+                    System.out.println("La encontramos en la columna " + (i + 1));
+                    break;
+                }
+            }
         }
     }
 }

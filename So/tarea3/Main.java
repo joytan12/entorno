@@ -8,13 +8,11 @@ public class Main
         
         String filePath = "ubicacion-tesoro.txt";
         MatrixFileReader reader = new MatrixFileReader(filePath);
-
-        int dim = reader.getDim();
-        int aux = reader.getAux();
+        int aux = reader.getDim();
         int[][] matriz = reader.getMatriz();
 
-        // Data thread = new Data(0, reader);
-        // thread.start();
+        Data thread = new Data(0, reader);
+        thread.start();
         Fork procesos = new Fork(0, reader);
         Resultado dim = new Resultado(aux);
         procesos.padre(dim);
