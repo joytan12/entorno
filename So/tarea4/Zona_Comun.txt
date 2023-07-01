@@ -1,0 +1,150 @@
+Persona6 14:10:10.557420, Casa del Terror, 14:10:10.984465, Carrusel, 14:10:31.995138
+Persona1 14:10:10.494420, Casa del Terror, 14:10:10.494420, Casa del Terror, 14:10:33.374133
+Persona16 14:10:12.630424, Barco Pirata, 14:10:15.397487, Barco Pirata, 14:10:37.124693
+Persona13 14:10:11.649421, Barco Pirata, 14:10:13.354424, Carrusel, 14:10:39.283734
+Persona9 14:10:10.984465, Casa del Terror, 14:10:11.696419, Carrusel, 14:10:41.025162
+Persona7 14:10:10.714455, Barco Pirata, 14:10:11.126420, Casa del Terror, 14:10:45.261841
+Persona11 14:10:11.316422, Casa del Terror, 14:10:12.504421, Montaña Rusa, 14:10:46.010840
+Persona14 14:10:11.840427, Casa del Terror, 14:10:14.336418, Montaña Rusa, 14:10:52.421898
+Persona15 14:10:11.999421, Casa del Terror, 14:10:14.970422, Montaña Rusa, 14:10:58.906936
+Persona20 14:10:13.618426, Casa del Terror, 14:10:17.950739, Montaña Rusa, 14:11:07.634961
+Persona28 14:10:16.105484, Casa del Terror, 14:10:31.549131, Barco Pirata, 14:11:15.188074
+Persona38 14:10:19.948741, Barco Pirata, 14:10:36.557161, Montaña Rusa, 14:11:26.845213
+Persona26 14:10:15.477483, Montaña Rusa, 14:10:29.876129, Montaña Rusa, 14:11:27.209824
+Persona39 14:10:20.218745, Barco Pirata, 14:10:36.825160, Montaña Rusa, 14:11:28.215784
+Persona24 14:10:14.604420, Montaña Rusa, 14:10:24.090323, Montaña Rusa, 14:11:28.755827
+Persona31 14:10:17.570739, Casa del Terror, 14:10:33.724130, Montaña Rusa, 14:11:29.912422
+Persona36 14:10:19.140740, Casa del Terror, 14:10:36.180160, Barco Pirata, 14:11:32.891216
+Persona3 14:10:10.495431, Montaña Rusa, 14:10:10.541425, Casa del Terror, 14:11:38.692132
+Persona19 14:10:13.246434, Montaña Rusa, 14:10:17.223545, Casa del Terror, 14:11:40.785168
+Persona23 14:10:14.243419, Montaña Rusa, 14:10:23.650322, Casa del Terror, 14:11:42.939125
+Persona51 14:10:26.531328, Barco Pirata, 14:10:50.748842, Montaña Rusa, 14:11:47.700460
+Persona18 14:10:13.007426, Montaña Rusa, 14:10:16.655545, Casa del Terror, 14:11:47.701463
+Persona58 14:10:31.932129, Barco Pirata, 14:11:01.254891, Barco Pirata, 14:11:47.702461
+Persona4 14:10:10.509467, Montaña Rusa, 14:10:10.714455, Casa del Terror, 14:11:47.703463
+Persona40 14:10:20.946599, Montaña Rusa, 14:10:38.156205, Barco Pirata, 14:11:47.705031
+Persona12 14:10:11.460419, Montaña Rusa, 14:10:12.943430, Casa del Terror, 14:11:47.706001
+Persona133 14:11:01.983894, Barco Pirata, 14:11:14.600111, Barco Pirata, 14:11:47.706001
+Persona67 14:10:33.533132, Casa del Terror, 14:11:17.503753, Barco Pirata, 14:11:47.706001
+Persona83 14:10:38.156205, Montaña Rusa, 14:11:10.017819, Barco Pirata, 14:11:47.706985
+Persona115 14:10:53.074935, Montaña Rusa, 14:11:11.187218, Barco Pirata, 14:11:47.707986
+Persona90 14:10:39.886773, Montaña Rusa, 14:11:13.871524, Barco Pirata, 14:11:48.568576
+Persona91 14:10:40.520727, Montaña Rusa, 14:11:14.142559, Barco Pirata, 14:11:50.870664
+Persona61 14:10:32.534129, Barco Pirata, 14:11:02.269934, Montaña Rusa, 14:11:51.589786
+Persona44 14:10:22.773205, Casa del Terror, 14:10:53.516901, Montaña Rusa, 14:11:51.604391
+Persona46 14:10:24.359320, Casa del Terror, 14:10:59.545891, Montaña Rusa, 14:11:51.637604
+Persona27 14:10:15.621483, Montaña Rusa, 14:10:30.880169, Montaña Rusa, 14:11:51.638601
+Persona80 14:10:37.172726, Barco Pirata, 14:11:02.523456, Montaña Rusa, 14:11:51.639600
+Persona32 14:10:17.777738, Montaña Rusa, 14:10:33.866129, Montaña Rusa, 14:11:51.668353
+Persona64 14:10:32.899130, Montaña Rusa, 14:11:05.964325, Barco Pirata, 14:11:51.702571
+Persona50 14:10:26.419320, Casa del Terror, 14:11:03.267085, Montaña Rusa, 14:11:51.779430
+Persona116 14:10:53.819896, Barco Pirata, 14:11:34.427421, Barco Pirata, 14:11:52.570995
+Persona29 14:10:16.909546, Barco Pirata, 14:10:32.376133, Carrusel, 14:11:54.701117
+Persona2 14:10:10.495431, Carrusel, 14:10:10.495431, Barco Pirata, 14:11:54.873476
+Persona101 14:10:46.309840, Montaña Rusa, 14:11:44.239144, Barco Pirata, 14:12:00.461917
+Persona68 14:10:33.596126, Barco Pirata, 14:11:13.156220, Montaña Rusa, 14:12:00.461917
+Persona56 14:10:31.517128, Casa del Terror, 14:11:04.232136, Montaña Rusa, 14:12:00.477591
+Persona63 14:10:32.819128, Casa del Terror, 14:11:10.569820, Montaña Rusa, 14:12:00.590455
+Persona65 14:10:33.153130, Casa del Terror, 14:11:11.824270, Montaña Rusa, 14:12:00.591001
+Persona93 14:10:41.434227, Barco Pirata, 14:11:20.427121, Montaña Rusa, 14:12:00.605734
+Persona122 14:10:56.544896, Montaña Rusa, 14:11:47.700460, Barco Pirata, 14:12:00.637812
+Persona70 14:10:33.913128, Montaña Rusa, 14:11:06.218442, Montaña Rusa, 14:12:00.638330
+Persona60 14:10:32.456131, Montaña Rusa, 14:11:04.963328, Montaña Rusa, 14:12:00.640343
+Persona71 14:10:34.025133, Casa del Terror, 14:11:24.146506, Montaña Rusa, 14:12:00.641486
+Persona118 14:10:55.118600, Barco Pirata, 14:11:38.040144, Montaña Rusa, 14:12:00.668858
+Persona131 14:11:00.764894, Barco Pirata, 14:11:39.893650, Montaña Rusa, 14:12:00.780353
+Persona10 14:10:11.158419, Montaña Rusa, 14:10:12.111422, Carrusel, 14:12:01.702534
+Persona21 14:10:13.902422, Montaña Rusa, 14:10:19.837737, Carrusel, 14:12:01.704136
+Persona42 14:10:22.011128, Carrusel, 14:10:40.647726, Barco Pirata, 14:12:08.703370
+Persona48 14:10:25.340320, Carrusel, 14:10:47.998845, Barco Pirata, 14:12:08.710444
+Persona34 14:10:18.174741, Casa del Terror, 14:10:35.103129, Carrusel, 14:12:08.711453
+Persona78 14:10:35.703196, Casa del Terror, 14:11:33.522453, Montaña Rusa, 14:12:09.463281
+Persona140 14:11:03.459088, Barco Pirata, 14:11:44.981142, Montaña Rusa, 14:12:09.479348
+Persona100 14:10:45.803850, Montaña Rusa, 14:11:37.659627, Montaña Rusa, 14:12:09.592101
+Persona146 14:11:04.551138, Barco Pirata, 14:11:47.701463, Montaña Rusa, 14:12:09.593669
+Persona92 14:10:40.790728, Montaña Rusa, 14:11:25.367054, Montaña Rusa, 14:12:09.608118
+Persona8 14:10:10.888418, Carrusel, 14:10:11.460419, Montaña Rusa, 14:12:09.640123
+Persona108 14:10:49.767850, Montaña Rusa, 14:11:45.994987, Montaña Rusa, 14:12:09.641642
+Persona124 14:10:57.892895, Montaña Rusa, 14:11:47.702461, Montaña Rusa, 14:12:09.643671
+Persona129 14:10:59.874903, Montaña Rusa, 14:11:47.705031, Montaña Rusa, 14:12:09.670609
+Persona94 14:10:41.574253, Casa del Terror, 14:11:45.504141, Montaña Rusa, 14:12:09.782943
+Persona99 14:10:45.771839, Casa del Terror, 14:11:47.706985, Barco Pirata, 14:12:11.937839
+Persona52 14:10:29.369499, Carrusel, 14:10:51.661946, Barco Pirata, 14:12:15.711029
+Persona73 14:10:34.879126, Barco Pirata, 14:11:03.459088, Casa del Terror, 14:12:16.939584
+Persona113 14:10:52.327895, Casa del Terror, 14:11:52.748933, Barco Pirata, 14:12:17.756068
+Persona30 14:10:17.223545, Montaña Rusa, 14:10:33.027169, Casa del Terror, 14:12:17.756068
+Persona142 14:11:03.810145, Montaña Rusa, 14:11:51.460696, Montaña Rusa, 14:12:18.465362
+Persona147 14:11:04.583137, Montaña Rusa, 14:11:51.589786, Montaña Rusa, 14:12:18.480970
+Persona35 14:10:18.538740, Montaña Rusa, 14:10:35.751196, Casa del Terror, 14:12:21.941010
+Persona41 14:10:21.376130, Carrusel, 14:10:40.269766, Montaña Rusa, 14:12:22.706229
+Persona45 14:10:23.536321, Casa del Terror, 14:10:47.114843, Carrusel, 14:12:22.706229
+Persona81 14:10:37.870249, Carrusel, 14:11:54.702123, Montaña Rusa, 14:12:22.712257
+Persona53 14:10:30.386177, Barco Pirata, 14:10:54.531592, Carrusel, 14:12:22.716875
+Persona120 14:10:56.085892, Casa del Terror, 14:11:57.751027, Montaña Rusa, 14:12:22.757426
+Persona37 14:10:19.726737, Montaña Rusa, 14:10:36.372162, Casa del Terror, 14:12:22.757426
+Persona57 14:10:31.676131, Casa del Terror, 14:11:08.582142, Casa del Terror, 14:12:26.941893
+Persona75 14:10:35.135130, Barco Pirata, 14:11:10.950557, Casa del Terror, 14:12:27.758971
+Persona102 14:10:46.402877, Carrusel, 14:12:01.712184, Barco Pirata, 14:12:29.717057
+Persona54 14:10:30.752175, Montaña Rusa, 14:10:57.654894, Carrusel, 14:12:29.717746
+Persona105 14:10:48.216843, Carrusel, 14:12:01.712184, Montaña Rusa, 14:12:29.717746
+Persona59 14:10:32.201130, Casa del Terror, 14:11:09.619820, Carrusel, 14:12:29.718757
+Persona128 14:10:59.449897, Casa del Terror, 14:12:06.937430, Montaña Rusa, 14:12:31.942861
+Persona84 14:10:38.472725, Barco Pirata, 14:11:19.716961, Casa del Terror, 14:12:31.942861
+Persona104 14:10:47.700848, Barco Pirata, 14:11:25.890182, Casa del Terror, 14:12:32.759925
+Persona62 14:10:32.693132, Montaña Rusa, 14:11:05.315363, Carrusel, 14:12:36.709783
+Persona66 14:10:33.469129, Carrusel, 14:11:01.841894, Barco Pirata, 14:12:36.714966
+Persona72 14:10:34.690127, Montaña Rusa, 14:11:06.839441, Carrusel, 14:12:36.715849
+Persona76 14:10:35.198129, Casa del Terror, 14:11:30.874745, Carrusel, 14:12:36.716856
+Persona77 14:10:35.261130, Casa del Terror, 14:11:31.447219, Carrusel, 14:12:36.717873
+Persona126 14:10:58.526934, Carrusel, 14:12:08.712444, Montaña Rusa, 14:12:36.718949
+Persona82 14:10:37.982209, Barco Pirata, 14:11:42.588099, Carrusel, 14:12:36.718949
+Persona69 14:10:33.787175, Casa del Terror, 14:11:18.323357, Casa del Terror, 14:12:36.943996
+Persona106 14:10:48.707839, Barco Pirata, 14:11:30.481423, Casa del Terror, 14:12:37.760920
+Persona110 14:10:50.558842, Barco Pirata, 14:11:31.749217, Casa del Terror, 14:12:41.946294
+Persona74 14:10:35.071129, Casa del Terror, 14:11:24.366504, Casa del Terror, 14:12:42.763040
+Persona98 14:10:45.547845, Montaña Rusa, 14:11:33.856422, Carrusel, 14:12:43.711072
+Persona96 14:10:43.980842, Montaña Rusa, 14:11:32.622217, Carrusel, 14:12:43.716585
+Persona85 14:10:38.568762, Casa del Terror, 14:11:34.886462, Carrusel, 14:12:43.717119
+Persona136 14:11:02.932979, Carrusel, 14:12:15.713113, Barco Pirata, 14:12:43.718641
+Persona22 14:10:14.135420, Carrusel, 14:10:22.281204, Carrusel, 14:12:43.718641
+Persona138 14:11:03.187527, Carrusel, 14:12:15.714116, Montaña Rusa, 14:12:43.720652
+Persona125 14:10:58.112935, Montaña Rusa, 14:11:47.703463, Carrusel, 14:12:43.720652
+Persona137 14:11:03.140065, Barco Pirata, 14:11:43.210087, Casa del Terror, 14:12:46.946730
+Persona95 14:10:43.617324, Montaña Rusa, 14:11:32.352261, Casa del Terror, 14:12:47.765271
+Persona33 14:10:17.840739, Carrusel, 14:10:34.579126, Carrusel, 14:12:50.712962
+Persona143 14:11:04.014096, Montaña Rusa, 14:11:51.477312, Carrusel, 14:12:50.717947
+Persona103 14:10:46.749847, Casa del Terror, 14:11:47.747392, Carrusel, 14:12:50.719474
+Persona145 14:11:04.343138, Carrusel, 14:12:22.715644, Barco Pirata, 14:12:50.720644
+Persona49 14:10:25.530322, Carrusel, 14:10:50.160847, Carrusel, 14:12:50.720644
+Persona111 14:10:50.874842, Carrusel, 14:12:08.706409, Carrusel, 14:12:50.723189
+Persona5 14:10:10.541425, Carrusel, 14:10:10.857419, Casa del Terror, 14:12:51.947797
+Persona17 14:10:12.788424, Carrusel, 14:10:15.791489, Casa del Terror, 14:12:52.766618
+Persona107 14:10:49.371845, Montaña Rusa, 14:11:45.599144, Casa del Terror, 14:12:56.948387
+Persona148 14:11:04.789327, Carrusel, 14:12:29.708971, Barco Pirata, 14:12:57.713426
+Persona112 14:10:51.408376, Casa del Terror, 14:11:51.932669, Carrusel, 14:12:57.713426
+Persona119 14:10:55.895371, Casa del Terror, 14:11:56.935177, Carrusel, 14:12:57.719534
+Persona150 14:11:05.043324, Carrusel, 14:12:29.716027, Montaña Rusa, 14:12:57.720542
+Persona88 14:10:39.568728, Carrusel, 14:11:54.703130, Carrusel, 14:12:57.722077
+Persona87 14:10:38.744725, Carrusel, 14:11:54.703130, Carrusel, 14:12:57.723077
+Persona123 14:10:57.371034, Casa del Terror, 14:12:02.752694, Carrusel, 14:12:57.724157
+Persona86 14:10:38.664729, Montaña Rusa, 14:11:47.326040, Casa del Terror, 14:12:57.767993
+Persona117 14:10:54.090901, Montaña Rusa, 14:11:47.700460, Casa del Terror, 14:13:01.949946
+Persona25 14:10:15.082424, Carrusel, 14:10:26.499320, Casa del Terror, 14:13:02.769385
+Persona109 14:10:50.288847, Carrusel, 14:12:08.703887, Carrusel, 14:13:04.715980
+Persona114 14:10:52.804909, Carrusel, 14:12:08.712444, Carrusel, 14:13:04.721509
+Persona135 14:11:02.492457, Casa del Terror, 14:12:11.937839, Carrusel, 14:13:04.723025
+Persona139 14:11:03.267085, Casa del Terror, 14:12:12.754786, Carrusel, 14:13:04.725044
+Persona130 14:11:00.397895, Carrusel, 14:12:15.711029, Carrusel, 14:13:04.726045
+Persona43 14:10:22.423204, Carrusel, 14:10:44.330887, Casa del Terror, 14:13:06.951751
+Persona47 14:10:25.091321, Carrusel, 14:10:47.700848, Casa del Terror, 14:13:07.770694
+Persona55 14:10:31.262126, Carrusel, 14:10:58.192935, Casa del Terror, 14:13:11.951833
+Persona79 14:10:36.825160, Carrusel, 14:11:01.967894, Casa del Terror, 14:13:12.771040
+Persona89 14:10:39.680728, Carrusel, 14:11:54.704140, Casa del Terror, 14:13:16.953918
+Persona121 14:10:56.339894, Casa del Terror, 14:12:01.935577, Casa del Terror, 14:13:17.772903
+Persona97 14:10:44.867841, Carrusel, 14:12:01.710184, Casa del Terror, 14:13:21.955998
+Persona134 14:11:02.460491, Casa del Terror, 14:12:07.753980, Casa del Terror, 14:13:22.773691
+Persona127 14:10:59.130906, Carrusel, 14:12:15.704499, Casa del Terror, 14:13:26.955523
+Persona132 14:11:01.571895, Carrusel, 14:12:15.712039, Casa del Terror, 14:13:27.774850
+Persona141 14:11:03.730097, Carrusel, 14:12:22.712257, Casa del Terror, 14:13:31.957450
+Persona149 14:11:04.963328, Carrusel, 14:12:29.715012, Casa del Terror, 14:13:32.778025
+Persona144 14:11:04.232136, Carrusel, 14:12:22.713272, Casa del Terror, 14:13:36.959512

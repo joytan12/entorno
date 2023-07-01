@@ -79,6 +79,6 @@ int main() {
     // for(int i=0; i <= cantidad; i++){
     //     printf("%d ",arreglo[i]);
     // }
-    // printf("\n");
+    // printf("\n");J
     return 0;
 }

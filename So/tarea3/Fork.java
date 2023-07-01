@@ -13,8 +13,10 @@ public class Fork {
         this.valor = valor;
         this.reader = reader;
     }
-
+    long p = System.nanoTime();
+    
     public void padre(Resultado dim){
+        //proceso padre
         if ((dim.getLimX() - dim.getX()) > reader.getAux()){
             try {
                 for (int i = 1; i <= 4; i++) {
@@ -28,13 +30,12 @@ public class Fork {
                 e.printStackTrace();
             }
         } else {
-            // aqui va el codigo de busqueda ayuda
-            // System.out.println("x:" + dim.getX() + " " + dim.getLimX() + " y:" + dim.getY() + " " + dim.getLimY());
             busqueda(dim);
         }
     }
 
     public void hijo(int valor, Resultado aux){
+        //proceso que ejecuta cada hijo
         Resultado dim = new Resultado(reader.getDim());
         dim.setX(aux.getX());
         dim.setY(aux.getY());
@@ -45,7 +46,7 @@ public class Fork {
     }
 
     public void parametrizador(int valor, Resultado dim){
-        
+        //genera los subcuadrantes
         int aux1 = (dim.getLimX() - dim.getX())/2, aux2 = (dim.getLimY() - dim.getY())/2;
 
         if (valor == 1 || valor == 3){
@@ -67,7 +68,9 @@ public class Fork {
         for (int i = dim.getX(); i < dim.getLimX(); i++){
             for (int j = dim.getY(); j < dim.getLimY() ; j++){
                 if (reader.getMatriz()[i][j] == 1){
-                    System.out.println("La encontramos en la columna " + (i + 1));
+                    System.out.println("fila " + (i + 1) + ", columna " + (j + 1));
+                    long durProce = (System.nanoTime() - p)/1000000;
+                    System.out.println("Fork: " + durProce + "ms");
                     break;
                 }
             }
