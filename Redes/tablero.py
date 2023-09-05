@@ -1,6 +1,13 @@
-def dibujar_tablero(tablero):
+'''
+ideas para la comunicacion, el cliento, servidor y bot tendran un tablero y solo se mandaran las cordenas
+y lo hiran actualizando cada uno.
+''' 
+
+def dibujarTablero(tablero):
+    for _ in range(6):
+        print(' ' ,_, '', end='')
+    print('')
     for fila in tablero:
-        print("|", end='')
         for casilla in fila:
             if casilla == 0:
                 print("   ", end="|")
@@ -10,7 +17,7 @@ def dibujar_tablero(tablero):
                 print(" O ", end="|")
         print("\n" + "---+" * 6)
 
-def verificar_ganador(tablero):
+def verificarGanador(tablero):
     # Verificar filas
     for fila in tablero:
         for i in range(3):
@@ -37,13 +44,33 @@ def verificar_ganador(tablero):
 
     return 0  # Si no hay ganador
 
+def jugarEnColumna(columna, tablero, jugador):
+    # Verificar que la columna sea válida
+    if columna < 0 or columna > 5:
+        print("Columna inválida. Debe ser un número entre 0 y 5.")
+        return False
+
+    # Encontrar la fila disponible en la columna
+    fila_disponible = -1
+    for fila in range(5, -1, -1):
+        if tablero[fila][columna] == 0:
+            fila_disponible = fila
+            break
+
+    # Si no se encontró una fila disponible en la columna, está llena
+    if fila_disponible == -1:
+        print("La columna está llena. Elige otra columna.")
+        return False
+
+    # Realizar el movimiento del jugador en la columna
+    tablero[fila_disponible][columna] = jugador
+    return True
+
 tablero = [
     [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0],
     [0, 0, 0, 1, 2, 0],
     [0, 0, 0, 1, 1, 0],
     [0, 0, 2, 2, 2, 0]
 ]
-
-dibujar_tablero(tablero)
