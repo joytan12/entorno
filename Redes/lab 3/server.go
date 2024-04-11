@@ -5,35 +5,39 @@ import (
 	"net"
 	"os"
 	"strings"
+	"encoding/json"
 )
 
+type DNSRecord struct {
+    Name  string `json:"name"`
+    IP    string `json:"ip"`
+    TTL   int    `json:"ttl"`
+    Type  string `json:"type"`
+}
+
+
 func handleDNSRequest(conn *net.UDPConn) {
-	buffer := make([]byte, 1024)
+    buffer := make([]byte, 1024)
 
-	n, addr, err := conn.ReadFromUDP(buffer)
-	if err != nil {
-		fmt.Println("Error reading from UDP connection:", err)
-		return
-	}
+    n, addr, err := conn.ReadFromUDP(buffer)
+    if err != nil {
+        fmt.Println("Error reading from UDP connection:", err)
+        return
+    }
 
-	fmt.Println("Received DNS request from", addr)
+    fmt.Println("Received DNS request from", addr)
 
-	domain := strings.TrimSpace(string(buffer[:n]))
+    var record DNSRecord
+    err = json.Unmarshal(buffer[:n], &record)
+    if err != nil {
+        fmt.Println("Error parsing JSON:", err)
+        return
+    }
 
-	ip, err := net.LookupIP(domain)
-	if err != nil {
-		fmt.Println("Error looking up IP for", domain, ":", err)
-		return
-	}
+    // Aquí puedes guardar la información del DNS en una base de datos,
+    // en memoria o en cualquier otro lugar según tus necesidades.
 
-	fmt.Println("Resolved", domain, "to", ip[0])
-
-	response := []byte(ip[0].String())
-	_, err = conn.WriteToUDP(response, addr)
-	if err != nil {
-		fmt.Println("Error writing response to UDP connection:", err)
-		return
-	}
+    fmt.Println("Received DNS record:", record)
 }
 
 func main() {
