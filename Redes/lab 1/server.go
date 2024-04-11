@@ -1,137 +1,305 @@
 package main
 
 import (
-	"bufio"
 	"encoding/json"
 	"fmt"
+	"log"
+	"math/rand"
 	"net"
-	"os"
+	"time"
 )
 
 type GameBoard struct {
 	Board [][]int `json:"board"`
 }
 
-type ServerResponse struct {
-	Available bool   `json:"Available"`
-	TCP_IP    string `json:"TCP_IP"`
-	TCP_Port  string `json:"TCP_Port"`
-	Board     [][]int
+type ServerInfo struct {
+	Available bool    // Indica si el servidor está disponible
+	TCP_IP    string  // Dirección IP del servidor TCP
+	TCP_Port  string  // Dirección Port del servidor TCP
+	Board     [][]int // Tablero 1
 }
 
-type ServerState struct {
-	Continue bool    `json:"Continue"`
-	Board    [][]int `json:"Board"`
-	Winner   string  `json:"Winner"`
+type State struct {
+	Continue bool    // Indica si se sigue jugando o no
+	Board    [][]int // Tablero
+	Winner   string  // Indica el ganador
 }
 
 func main() {
-	// Dirección para conexión con el servidor UDP
-	serverAddr, err := net.ResolveUDPAddr("udp", "127.0.0.1:8081")
+	// Establecer la semilla del generador de números aleatorios
+	rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	// Generar los tableros
+	board1 := generateBoard()
+	board2 := generateBoard()
+	fmt.Println("Tableros generados")
+
+	// Colocar dos unos al azar en cada tablero
+	placeRandomOnes(board1)
+	placeRandomOnes(board2)
+	fmt.Println("Barcos colocados")
+
+	fmt.Println("Tablero servidor:")
+	printBoard(board1)
+	fmt.Println("\nTablero cliente:")
+	printBoard(board2)
+
+	// Creación de conexión UDP
+	udpAddr, err := net.ResolveUDPAddr("udp", "127.0.0.1:8081")
 	if err != nil {
-		fmt.Println("Error con la dirección del servidor:", err)
+		fmt.Println("Error en la creación UDP:", err)
 		return
 	}
 
-	// Establecer conexión UDP con el Servidor
-	conn, err := net.DialUDP("udp", nil, serverAddr)
+	// UDP en modo "escuchar"
+	conn, err := net.ListenUDP("udp", udpAddr)
 	if err != nil {
-		fmt.Println("Error al crear la conexión:", err)
+		fmt.Println("Error al escuchar en la dirección UDP:", err)
 		return
 	}
 	defer conn.Close()
 
-	// Ya con la conexión, debemos enviar la orden de inicio del juego
-	message := []byte("Empezar juego")
+	fmt.Println("Servidor UDP iniciado.")
 
-	_, err = conn.Write(message)
-	if err != nil {
-		fmt.Println("Error al enviar datos:", err)
-		return
-	}
-
-	fmt.Println("Datos enviados correctamente al servidor UDP.")
-
-	// Se espera la disponibilidad del servidor, junto a su ip, puerto y el tablero
+	// buffer para leer los datos que recibiremos desde el cliente
 	buffer := make([]byte, 1024)
 
 	n, addr, err := conn.ReadFromUDP(buffer)
 	if err != nil {
-		fmt.Println("Error al recibir respuesta:", err)
+		fmt.Println("Error al leer datos:", err)
+	}
+
+	respuesta := string(buffer[:n])
+	// Imprimir los datos recibidos
+	fmt.Printf("Recibido %d bytes de %s: %s\n", n, addr, respuesta)
+	if respuesta == "Empezar juego" {
+		fmt.Println("¡El cliente dio la orden de iniciar el juego!")
+	}
+
+	// Enviar al cliente los datos para iniciar el juego
+	// (Disponibilidad, IP, Puerto [TCP] y tablero)
+	serverInfo := ServerInfo{
+		Available: true,        // Disponibilidad del servidor
+		TCP_IP:    "127.0.0.1", // Dirección IP del servidor TCP
+		TCP_Port:  "9000",      //Puerto del servidor TCP
+		Board:     board2,      // Enviar el tablero 2 (cliente)
+	}
+
+	// Pasar esta información a JSON para facilidad de envío y recibimiento
+	serverInfoJSON, err := json.Marshal(serverInfo)
+	if err != nil {
+		fmt.Println("Error al serializar ServerInfo:", err)
 		return
 	}
 
-	// Decodificar JSON
-	var serverResponse ServerResponse
-	if err := json.Unmarshal(buffer[:n], &serverResponse); err != nil {
-		fmt.Println("Error al decodificar la respuesta del servidor:", err)
+	// Abrir servidor TCP utilizando la información del JSON
+	tcpAddr := serverInfo.TCP_IP + ":" + serverInfo.TCP_Port
+	listener, err := net.Listen("tcp", tcpAddr)
+	if err != nil {
+		fmt.Println("Error al abrir servidor TCP:", err)
+		return
+	}
+	defer listener.Close()
+
+	fmt.Println("Servidor TCP iniciado en", tcpAddr)
+
+	// Enviar ServerInfo serializado al cliente
+	_, err = conn.WriteToUDP(serverInfoJSON, addr)
+	if err != nil {
+		fmt.Println("Error al enviar datos al cliente:", err)
 		return
 	}
 
-	fmt.Printf("Respuesta del servidor (%s): %s\n", addr, string(buffer[:n]))
+	fmt.Println("Juego comenzado. Tablero enviado al cliente.")
 
-	// Utilizar las variables de la respuesta para conectarse al servidor TCP
-	fmt.Println("Disponibilidad del servidor:", serverResponse.Available)
-	fmt.Println("Dirección IP del servidor TCP:", serverResponse.TCP_IP)
-	fmt.Println("Puerto del servidor TCP:", serverResponse.TCP_Port)
-	printBoard(serverResponse.Board)
-
-	// Ciclo de juego
+	// Bucle principal del juego
 	for {
-		// Conectar al servidor TCP
-		connTCP, err := net.Dial("tcp", serverResponse.TCP_IP+":"+serverResponse.TCP_Port)
+		conn, err := listener.Accept()
 		if err != nil {
-			fmt.Println("Error al conectar al servidor TCP:", err)
-			return
+			fmt.Println("Error al aceptar conexión entrante:", err)
+			continue
 		}
-		defer connTCP.Close()
+		defer conn.Close()
 
-		fmt.Println("Conexión establecida con el servidor TCP.")
+		// Aquí puedes manejar la conexión entrante
+		fmt.Println("Conexión entrante aceptada desde:", conn.RemoteAddr())
 
-		// Generar jugada y luego enviarla
-		fmt.Print("Ingresa un dígito: ")
-		reader := bufio.NewReader(os.Stdin)
-		digitStr, err := reader.ReadString('\n')
+		// Leer los datos enviados por el cliente
+		buffer := make([]byte, 1024)
+		_, err = conn.Read(buffer)
 		if err != nil {
-			fmt.Println("Error al leer el dígito:", err)
-			return
+			fmt.Println("Error al leer datos del cliente:", err)
+			conn.Close() // Cerramos la conexión si hay un error al leer los datos
+			continue
 		}
 
-		// Enviar el dígito al servidor
-		_, err = fmt.Fprintf(connTCP, digitStr)
+		// Estado del juego
+		serverState := State{
+			Continue: true,   // Seguir juego o no
+			Board:    board2, // Enviar el tablero2 (cliente)
+			Winner:   "-1",   // Indicar ganador
+		}
+
+		// Pasar esta información a JSON para facilidad de envío y recibimiento
+		serverStateJSON, err := json.Marshal(serverState)
 		if err != nil {
-			fmt.Println("Error al enviar el dígito al servidor:", err)
+			fmt.Println("Error al serializar ServerInfo:", err)
 			return
 		}
 
-		//Esperar respuesta del servidor TCP
-		var serverState ServerState
-		decoder := json.NewDecoder(connTCP)
-		if err := decoder.Decode(&serverState); err != nil {
-			fmt.Println("Error al decodificar los datos JSON del servidor:", err)
-			return
-		}
-		fmt.Println("Estado del servidor:", serverState)
-		serverResponse.Board = serverState.Board
-		fmt.Println("Tablero cliente actual:")
-		printBoard(serverResponse.Board)
+		// Imprimir la jugada recibida (Puede ser A, B, C o D)
+		jugada := string(buffer[0])
+		jugada_cords := letterToCoordinates(jugada)
+		fmt.Printf("Jugada recibida del cliente (%s): %s, con coordenadas: %v\n", conn.RemoteAddr(), jugada, jugada_cords)
 
-		if serverState.Continue == false { //Juego finaliza
-			fmt.Printf("Juego finalizado. ¡Ganador %s!\n", serverState.Winner)
+		//Realizar jugada Cliente
+		attack(board1, jugada_cords)
+		// Realizar la jugada y verificar si alguien ganó.
+		fmt.Println("Tablero servidor:")
+		printBoard(board1)
+		fmt.Println("\nTablero cliente:")
+		printBoard(board2)
+
+		//Verificar si se continúa o no
+		if checkForShips(board1) == true { //Si no hay barcos en el board Servidor
+			// fmt.Println("-----------------------------")
+			// printBoard(board1)
+			// fmt.Println("-----------------------------")
+			serverState.Continue = false
+			serverState.Winner = "Cliente"
+			serverStateJSON, err := json.Marshal(serverState)
+			if err != nil {
+				fmt.Println("Error al serializar ServerInfo:", err)
+				return
+			}
+			_, err = conn.Write(serverStateJSON)
 			break
 		}
-		//  else { //Juego continúa
-		// 	if err := decoder.Decode(&serverState); err != nil {
-		// 		fmt.Println("Error al decodificar los datos JSON del servidor:", err)
-		// 		return
-		// 	}
-		// 	fmt.Println("Estado del servidorr:", serverState)
+
+		// Si quedan barcos en servidor el juego sigue, y continua con coordenadas random
+		fmt.Println("Ahora juega el servidor")
+		coordenadas_random := generarCoordsRandom()
+		fmt.Println("coords random", coordenadas_random)
+		//Ataque del servidor
+		attack(board2, coordenadas_random) // Jugada servidor
+		fmt.Println("Tablero servidor:")
+		printBoard(board1)
+		fmt.Println("\nTablero cliente:")
+		printBoard(board2)
+
+		//Verificar si se continua o no
+		if checkForShips(board2) == true { //Si no hay barcos en el board Cliente
+			// fmt.Println("-----------------------------")
+			// printBoard(board2)
+			// fmt.Println("-----------------------------")
+			serverState.Continue = false
+			serverState.Winner = "Servidor"
+			// _, err = conn.Write(serverStateJSON)
+		}
+
+		serverStateJSON, err = json.Marshal(serverState)
+		if err != nil {
+			fmt.Println("Error al serializar ServerInfo:", err)
+			return
+		}
+
+		_, err = conn.Write(serverStateJSON)
+
+		// fmt.Println("Tablero servidor:")
+		// printBoard(board1)
+		// fmt.Println("\nTablero cliente:")
+		// printBoard(board2)
+
+		// serverState.Continue = (checkForShips(board1) || checkForShips(board2))
+		// if checkForShips(board1) {
+		// 	serverState.Winner = "Servidor"
+		// }
+		// if checkForShips(board2) {
+		// 	serverState.Winner = "Cliente"
 		// }
 
+		// _, err = conn.Write(serverStateJSON)
+
+		if serverState.Continue == false {
+			// Si le atinó el servidor, el juego termina con previa señal al cliente.
+			fmt.Printf("Juego finalizado. ¡Ganador: %s!\n", serverState.Winner)
+			break
+		}
+		fmt.Println("estado final", serverState)
+	}
+	// Juego finalizado debido al continue, ya sea de los errores o de que terminó el game
+	// defer listener.Close()
+	fmt.Println("Conexión TCP finalizada")
+}
+
+// Generar un tablero 2x2 con ceros
+func generateBoard() [][]int {
+	board := make([][]int, 2)
+	for i := range board {
+		board[i] = make([]int, 2)
+	}
+	return board
+}
+
+// Colocar dos unos al azar en el tablero
+func placeRandomOnes(board [][]int) {
+	// Generar dos pares de coordenadas únicas
+	for i := 0; i < 2; i++ {
+		row := rand.Intn(2)
+		col := rand.Intn(2)
+		// Verificar si la posición ya está ocupada por un uno
+		for board[row][col] == 1 {
+			row = rand.Intn(2)
+			col = rand.Intn(2)
+		}
+		board[row][col] = 1
 	}
 }
 
-// Función para imprimir el tablero
+// Aplicar el ataque en el tablero del oponente
+func attack(board [][]int, coordinates []int) bool {
+	row, col := coordinates[0], coordinates[1]
+
+	if board[row][col] == 1 {
+		board[row][col] = -1
+		return true
+	}
+	board[row][col] = -1
+	return false
+}
+
+// Enviar el tablero al cliente
+func sendBoard(conn net.Conn, board [][]int) {
+	gameBoard := GameBoard{Board: board}
+	jsonData, err := json.Marshal(gameBoard)
+	if err != nil {
+		log.Fatalf("Error al serializar el tablero: %v", err)
+	}
+	conn.Write(jsonData)
+}
+
+func letterToCoordinates(letter string) []int {
+	var row, col int
+
+	switch letter {
+	case "A":
+		row, col = 0, 0
+	case "B":
+		row, col = 0, 1
+	case "C":
+		row, col = 1, 0
+	case "D":
+		row, col = 1, 1
+	default:
+		fmt.Println("Letra no válida")
+		return nil
+	}
+
+	// fmt.Println(row, col)
+	return []int{row, col}
+}
+
 func printBoard(board [][]int) {
 	for _, row := range board {
 		for _, cell := range row {
@@ -139,4 +307,27 @@ func printBoard(board [][]int) {
 		}
 		fmt.Println()
 	}
+}
+
+func generarCoordsRandom() []int {
+	// rand.Seed(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano())) // Inicializar la semilla del generador de números aleatorios
+
+	// Generar coordenadas aleatorias
+	coordenadas := make([]int, 2)
+	for i := range coordenadas {
+		coordenadas[i] = rand.Intn(2) // Generar un número aleatorio entre 0 y 1
+	}
+	return coordenadas
+}
+
+func checkForShips(board [][]int) bool {
+	for _, row := range board {
+		for _, cell := range row {
+			if cell == 1 {
+				return false // Hay al menos un barco en el tablero
+			}
+		}
+	}
+	return true // No hay barcos en el tablero
 }
