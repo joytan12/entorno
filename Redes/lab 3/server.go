@@ -37,7 +37,7 @@ func handleDNSRequest(conn *net.UDPConn) {
 }
 
 func main() {
-	udpAddr, err := net.ResolveUDPAddr("udp", ":53")
+	udpAddr, err := net.ResolveUDPAddr("udp", ":63420")
 	if err != nil {
 		fmt.Println("Error resolving UDP address:", err)
 		os.Exit(1)
@@ -50,7 +50,7 @@ func main() {
 	}
 	defer conn.Close()
 
-	fmt.Println("DNS server listening on port 53...")
+	fmt.Println("DNS server listening on port 63420...")
 
 	for {
 		handleDNSRequest(conn)
