@@ -48,7 +48,7 @@ while True:
         print("Tipo de dominio: ")
         Type = input()
         data["Type"] = Type
-        print(f"Tipo: {data["Type"]}")
+        print(f"Tipo: {Type}")
 
         print(f"Resumen: {data}")
         # print(f"Resumen:\n Nombre del dominio: {domainName}\n IP del dominio: {IP}\n TTL: {TTL}\n Tipo: {Type}")
