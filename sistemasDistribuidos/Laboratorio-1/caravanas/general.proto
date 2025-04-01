@@ -1,0 +1,155 @@
+syntax = "proto3";
+
+package grupo11;
+
+option go_package = "/proto";
+
+// Mensajes y Servicios para Logística
+// Cliente -> servidor
+message PedidoRequest { 
+    string tipo = 1; // Tipo de paquete (Ostronitas, Prioritario o Normal)
+    int32 valor = 2; // Valor del paquete
+    string escolta = 3; // Escolta asignada
+    string destino = 4; // Destino del paquete
+
+}
+
+message PedidoStatus {
+    string numeroSeguimiento = 1;
+}
+
+// Cliente <- servidor
+message PedidoResponse { 
+    string numeroSeguimiento = 1;
+}
+
+// message PedidoState {
+//     string estado = 1; // Estado actual del pedido (En Cetus, En camino, Entregado o No Entregado)
+// }
+
+// service PedidoService {
+//     // Crear un nuevo pedido y obtener número de seguimiento
+//     rpc crearPedido (PedidoRequest) returns (PedidoResponse);
+
+//     // Obtener el estado de un pedido mediante su número de seguimiento
+//     rpc GetPedidoStatus (PedidoStatus) returns (PedidoState);
+// }
+
+// Cliente -> Servidor
+message GenerarOrden {
+    string id = 1;
+    string tipo = 2;
+    string nombre = 3;
+    string valor = 4;
+    string escolta = 5;
+    string destino = 6;
+}
+
+// Cliente <- Servidor
+message RecibirNumeroSeguimiento {
+    string numeroSeguimiento = 1;
+}
+
+service PedidoService {
+    rpc GetPedidoStatus (GenerarOrden) returns (RecibirNumeroSeguimiento);
+}
+
+// Cliente -> Servidor
+message SolicitarEstado {
+    string numeroSeguimiento = 1;
+}
+
+// Cliente <- Servidor
+message EstadoPaquete {
+    string Estado = 1;
+}
+
+service PedidoState {
+    rpc GetPedidoState (SolicitarEstado) returns (EstadoPaquete);
+}
+
+// Mensajes y Servicios para Caravanas 
+// Servidor -> Caravanas
+message IngresarACaravana { 
+    int32 Caravana = 1;
+    string IdPaquete = 2;
+    string Tipo = 3;
+    string Valor = 4;
+    string Escolta = 5;
+    string Destino = 6;
+    string NumeroSeguimiento = 7;
+}
+
+
+// Servidor <- Caravanas
+message RespuestaIngreso {
+    string Estado = 1;
+}
+
+service IngresoCaravana {
+    rpc GetIngresoCaravana (IngresarACaravana) returns (RespuestaIngreso);
+}
+
+// Servidor -> Caravanas
+message SolicitarEstadoCaravanas {
+    string Solicitud = 1;
+}
+
+// Servidor <- caravanas
+message EstadoCaravanas {
+    int32 Caravana1 = 1; // Caravana Prioritaria 1
+    int32 Caravana2 = 2; // Caravana Prioritaria 2
+    int32 Caravana3 = 3; // Caravana Normal
+    string Caravana1Estado = 4;
+    string Caravana2Estado = 5;
+    string Caravana3Estado = 6;
+}
+
+service PreguntarEstadoCaravanas {
+    rpc GetEstadoCaravanas (SolicitarEstadoCaravanas) returns (EstadoCaravanas);
+}
+
+// Servidor <- caravanas
+// Encargado de, una vez llegue la caravana a cetus enviarle el estado de los paquetes para que el servidor se lo envie a financiero
+message RecibirEstadoPaquetesCaravanas {
+    string IDpaquete = 1;
+    string Tipo = 2;
+    string Valor = 3;
+    string Escolta = 4;
+    string Destino = 5;
+    string Intentos = 6;
+    string FechaEntrega = 7;
+}
+
+message ConfirmarRecibimientoEstado {
+    string Estado = 1;
+}
+
+service EstadoPaquetesCaravanas {
+    rpc GetEstadoPaquetesCaravanas (RecibirEstadoPaquetesCaravanas) returns (ConfirmarRecibimientoEstado);
+}
+
+// message CaravanasState {
+//     string estado = 1;
+// }
+
+// service CaravanaService {
+//     rpc GetCaravanaInfo (CaravanaRequest) returns (CaravanaResponse);
+// }
+
+// Puedes seguir añadiendo más servicios y mensajes según sea necesario.
+// Por ejemplo, si tienes un servicio financiero, lo incluirías también:
+
+// Mensajes y Servicios para Financiero
+message FinancieroRequest {
+    string transaction_id = 1;
+}
+
+message FinancieroResponse {
+    string status = 1;
+    float amount = 2;
+}
+
+service FinancieroService {
+    rpc GetTransactionStatus (FinancieroRequest) returns (FinancieroResponse);
+}

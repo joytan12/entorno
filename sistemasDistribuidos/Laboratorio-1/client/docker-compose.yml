@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: .
+    ports:
+      - "8082:8082"
+    environment:
+      - SERVER_HOST=10.35.168.51:8080
+    volumes:
+      - ./input.txt:/app/input.txt

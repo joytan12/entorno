@@ -1,0 +1,123 @@
+# version: '3.8'
+
+services:
+  # Primary Node (VM4)
+  primarynode:
+    image: primarynode_image
+    build:
+      context: ./VM4/PrimaryNode
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - red-grupo11
+    depends_on:
+      - datanode1
+      # - datanode2
+      # - continenteserver
+
+  # Data Node 1 (VM1)
+  datanode1:
+    image: datanode1_image
+    build:
+      context: ./VM1/DataNode1
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - red-grupo11
+
+  # Data Node 2 (VM3)
+  datanode2:
+    image: datanode2_image
+    build:
+      context: ./VM3/DataNode2
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    networks:
+      - red-grupo11
+
+  # Continente Folder (VM2)
+  continentefolder:
+    image: continentefolder_image
+    build:
+      context: ./VM2/ContinenteFolder
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8085"
+    networks:
+      - red-grupo11
+    volumes:
+      - ./ArchivosConstantes/txt/INPUT.txt:/app/input.txt
+      - ./ArchivosConstantes/txt/DIGIMONS.txt:/app/digimons.txt
+    depends_on:
+      - primarynode
+
+  # Continente Server (VM3)
+  continenteserver:
+    image: continenteserver_image
+    build:
+      context: ./VM3/ContinenteServer
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    networks:
+      - red-grupo11
+    volumes:
+      - ./ArchivosConstantes/txt/INPUT.txt:/app/input.txt
+      - ./ArchivosConstantes/txt/DIGIMONS.txt:/app/digimons.txt
+    depends_on:
+      - primarynode
+
+  # Isla File (VM1)
+  islafile:
+    image: islafile_image
+    build:
+      context: ./VM1/IslaFile
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8084"
+    networks:
+      - red-grupo11
+    volumes:
+      - ./ArchivosConstantes/txt/INPUT.txt:/app/input.txt
+      - ./ArchivosConstantes/txt/DIGIMONS.txt:/app/digimons.txt
+    depends_on:
+      - primarynode
+
+  # Nodo Tai (VM4)
+  nodetai:
+    image: nodetai_image
+    build:
+      context: ./VM4/NodeTai
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8086"
+    networks:
+      - red-grupo11
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./ArchivosConstantes/txt/INPUT.txt:/app/input.txt
+
+  # Diaboromon (VM2)
+  diaboromon:
+    image: diaboromon_image
+    build:
+      context: ./VM2/Diaboromon
+      dockerfile: Dockerfile
+    ports:
+      - "8087:8087"
+    networks:
+      - red-grupo11
+    volumes:
+      - ./ArchivosConstantes/txt/INPUT.txt:/app/input.txt
+
+networks:
+  red-grupo11:
+    external: true
+
+# networks:
+#   red-grupo11:
+#     driver: bridge

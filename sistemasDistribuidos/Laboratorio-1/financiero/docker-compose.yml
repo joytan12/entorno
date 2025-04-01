@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  financiero:
+    build:
+      context: .
+    ports:
+      - "8084:8084"
+    environment:
+      - RABBITMQ_URL=amqp://user:password@10.35.168.51:5672/    

@@ -1,0 +1,12 @@
+0001,Ostronitas,Pocion,500,Escolta4,Destino2
+0002,Ostronitas,Jamon,200,Escolta2,Destino1
+0003,Prioritario,Pan,100,Escolta1,Destino2
+0004,Normal,Arrollado,150,Escolta2,Destino3
+0005,Ostronitas,Score,90,Escolta3,Destino4
+0006,Ostronitas,Anticucho,10000,Escolta1,Destino2
+0007,Ostronitas,Pocion,500,Escolta4,Destino2
+0008,Ostronitas,Jamon,200,Escolta2,Destino1
+0009,Prioritario,Pan,100,Escolta1,Destino2
+0010,Normal,Arrollado,150,Escolta2,Destino3
+0011,Ostronitas,Score,90,Escolta3,Destino4
+0012,Ostronitas,Anticucho,10000,Escolta1,Destino2

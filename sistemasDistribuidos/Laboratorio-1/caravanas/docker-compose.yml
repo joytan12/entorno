@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  caravanas:
+    build:
+      context: .
+    ports:
+      - "8081:8081"
+    # environment:
+    #   - RABBITMQ_URL=amqp://user:password@10.35.168.51:5672/

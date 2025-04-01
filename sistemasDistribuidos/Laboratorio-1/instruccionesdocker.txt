@@ -1,0 +1,13 @@
+➤ INTEGRANTES
+
+Juan García 202073539-5
+Vicente Zapata 202073573-5
+
+➤ INSTRUCCIONES DE EJECUCIÓN
+Para ejecutar nuestro Laboratorio, se debe ingresar a la carpeta raíz de nuestro
+laboratorio y ejecutar el siguiente comando por consola:
+"docker-compose up --build" y empezará a ejecutarse el laboratorio de forma
+inmediata.
+
+➤ OBSERVACIONES
+- Por favor leer observaciones que están en README.txt.

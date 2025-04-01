@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    logging:
+      driver: "none"
+    networks:
+      - test_network
+
+  financiero:
+    build: ./financiero
+    ports:
+      - "8084:8084"
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBITMQ_URL=amqp://user:password@rabbitmq:5672/
+    networks:
+      - test_network
+
+
+  server:
+    build: ./server
+    ports:
+      - "8080:8080"
+    depends_on:
+      - financiero
+      - rabbitmq
+    environment:
+      - RABBITMQ_URL=amqp://user:password@rabbitmq:5672/
+    networks:
+        - test_network
+
+  caravanas:
+    build: 
+      context: ./caravanas
+      dockerfile: Dockerfile
+    container_name: go_caravanas_container
+    ports:
+      - "8081:8081"
+    networks:
+      - test_network
+  
+  client:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: go_client_container
+    depends_on:
+      - server
+    networks:
+      - test_network
+    environment:
+      - SERVER_HOST=go_server_container
+    volumes:
+      - ./client/input.txt:/app/input.txt
+
+networks:
+  test_network:
+    external: true

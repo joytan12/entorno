@@ -1,0 +1,63 @@
+services:
+  # Broker (VM4)
+  broker:
+    image: broker_image
+    build:
+      context: ./VM4/Broker
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+  # Jayce (VM2)
+  jayce:
+    image: jayce_image
+    build:
+      context: ./VM2/Jayce
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+
+  # Servidor 1 (VM1)
+  servidor1:
+    image: servidor1_image
+    build:
+      context: ./VM1/Servidor1
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+
+  # Servidor 2 (VM2)
+  servidor2:
+    image: servidor2_image
+    build:
+      context: ./VM2/Servidor2
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+
+  # Servidor 3 (VM3)
+  servidor3:
+    image: servidor3_image
+    build:
+      context: ./VM3/Servidor3
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8084"
+
+  # Supervisor 1 (VM1)
+  supervisor1:
+    image: supervisor1_image
+    build:
+      context: ./VM1/Supervisor1
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8085"
+
+  # Supervisor 2 (VM3)
+  supervisor2:
+    image: supervisor2_image
+    build:
+      context: ./VM3/Supervisor2
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8086"

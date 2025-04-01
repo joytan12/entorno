@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package grupo11;
+
+option go_package = "/proto";
+
+// Mensajes y Servicios para Logística
+message DigimonRequest {
+    string opt = 1;
+    string todo = 2;
+}
+
+message DigimonResponse {
+    string status = 1;
+}
+
+service DigimonService {
+    rpc GetDigimonStatus (DigimonRequest) returns (DigimonResponse);
+}
+
+// TESTEO ALO
